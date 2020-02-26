@@ -363,8 +363,8 @@ class SpawnBase(object):
             async_ = kw.pop('async')
         if kw:
             raise TypeError("Unknown keyword arguments: {}".format(kw))
-
-        exp = Expecter(self, searcher_re(pattern_list), searchwindowsize)
+        searcher_buf = searcher_re(pattern_list)
+        exp = Expecter(self, searcher_buf, searchwindowsize)
         if async_:
             from ._async import expect_async
             return expect_async(exp, timeout)
