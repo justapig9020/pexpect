@@ -369,7 +369,9 @@ class SpawnBase(object):
             from ._async import expect_async
             return expect_async(exp, timeout)
         else:
-            return exp.expect_loop(timeout)
+            self.match_index = exp.expect_loop(timeout)
+            self.match = searcher_buf.match.group(0)
+            return self.match_index
 
     def expect_exact(self, pattern_list, timeout=-1, searchwindowsize=-1,
                      async_=False, **kw):

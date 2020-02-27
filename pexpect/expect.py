@@ -1,5 +1,5 @@
 import time
-
+import re
 from .exceptions import EOF, TIMEOUT
 
 class Expecter(object):
@@ -309,6 +309,7 @@ class searcher_re(object):
         self.eof_index = -1
         self.timeout_index = -1
         self._searches = []
+        self.match = re.search(b'',b'')
         for n, s in enumerate(patterns):
             if s is EOF:
                 self.eof_index = n
